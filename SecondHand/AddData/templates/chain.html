@@ -1,0 +1,16 @@
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Выводим каждое поле формы в отдельном параграфе -->
+    {{ form.as_p }}
+    <button type="submit">Загрузка</button>
+</form>
+
+<!-- Выводим уже созданные записи -->
+{% for b in Chains %}
+<p>{{ b.id_chain}}</p>
+<img src="{{b.logo_chain}}">
+<!-- Выводим размер картинки -->
+<p>{{ b.name_of_chain }}</p>
+<p>{{ b.description }}</p>
+<br/>
+{% endfor %}

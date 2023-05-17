@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<h2>ddkjdkdk</h2>
+{% for shop in shops %}
+{{shop.id_store}}
+{%endfor%}
+
+{% for event in events %}
+{{event.description}}
+
+{% for shop in event.shop.all %}
+  {{ shop.id_store}}
+{% endfor %}
+
+
+{%endfor%}
+</body>
+</html>
