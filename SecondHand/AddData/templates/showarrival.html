@@ -15,14 +15,10 @@
       // Создание карты
       map = new ymaps3.YMap(document.getElementById('map'), {
           location: {
-              // Координаты центра карты
-              // Порядок по умолчанию: «долгота, широта»
+              // Координаты центра карты Порядок по умолчанию: «долгота, широта»
               center: [50, 25],
-              // Уровень масштабирования
-              // Допустимые значения: от 0 (весь мир) до 21.
-              zoom: 10
-          }
-      });
+              // Уровень масштабирования Допустимые значения: от 0 (весь мир) до 21.
+              zoom: 10 }});
       // Добавляем слой для отображения схематической карты
       map.addChild(new ymaps3.YMapDefaultSchemeLayer());
 map.addChild(new YMapDefaultFeaturesLayer()); // В этом слое будут маркеры.
@@ -33,9 +29,7 @@ const marker = new YMapMarker({
     draggable: true
 }, content);
 map.addChild(marker);
-content.innerHTML = '<h1>Этот заголовок можно переносить</h1>';
-
-}
+content.innerHTML = '<h1>Этот заголовок можно переносить</h1>';}
 </script>
 
 
