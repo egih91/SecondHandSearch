@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://api-maps.yandex.ru/3.0/?apikey=0524eb0e-04a8-46d4-b25a-c499ba81bca6&lang=ru_RU"></script>
+      <script>
+  let map;
+  main();
+  async function main() {
+      // Промис `ymaps3.ready` будет зарезолвлен, когда загрузятся все компоненты API
+      await ymaps3.ready;
+      // Создание карты
+      map = new ymaps3.YMap(document.getElementById('map'), {
+          location: {
+              // Координаты центра карты
+              // Порядок по умолчанию: «долгота, широта»
+              center: [50, 25],
+              // Уровень масштабирования
+              // Допустимые значения: от 0 (весь мир) до 21.
+              zoom: 10
+          }
+      });
+      // Добавляем слой для отображения схематической карты
+      map.addChild(new ymaps3.YMapDefaultSchemeLayer());
+map.addChild(new YMapDefaultFeaturesLayer()); // В этом слое будут маркеры.
+// DOM-элемент должен быть создан заранее, но его содержимое можно задать в любой момент.
+const content = document.createElement('section');
+const marker = new YMapMarker({
+    coordinates: [50, 25],
+    draggable: true
+}, content);
+map.addChild(marker);
+content.innerHTML = '<h1>Этот заголовок можно переносить</h1>';
+
+}
+</script>
+
+
+
+  </head>
+  <body>
+  <div id="map" style="width: 600px; height: 400px"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <main class="container">
+  <div class="row g-5">
+    <div class="col-md-8">
+      <div class="row mb-2">
+
+        <div id="mymap"></div>
+
+        <div class="col-md-6">
+      {% for Arrival in Arrivals %}
+      {% load static%}
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h4 class="mb-0">{{Arrival.name_of_arrival}}</h4>
+          <div class="mb-1 text-body-secondary">{{Arrival.date.date}}</div>
+          {% for Shop in Arrival.shop.all %}
+          <h6 class="mb-0">{{Shop.city}}, {{Shop.store_address}}</h6>
+          <a href="/create/showarrivalstore/{{Shop.id_shop}}" class="stretched-link">Найти все завозы этого магазина</a>
+           {% endfor %}
+        {% endfor %}
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+
+        <div class="p-4">
+          <h4 class="fst-italic">Найти завозы сети</h4>
+          <ol class="list-unstyled mb-0">
+            {% for Chain in Chains %}
+            {% load static%}
+            <li><a href="/create/showarrivalchain/{{Chain.id_chain}}"><img src={% static Chain.logo_chain.url %} width="140" height="70" alt={{Chain.name_of_chain}}/></a></li>
+            {%endfor%}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+
+
+  </body>
+</html>
+
+
+

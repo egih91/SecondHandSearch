@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% for discount in Discount %}
+{% load static%}
+<p>{{ dicount.discount}}</p><br/>
+<p>{{ dicount.description }}</p><br/>
+<p>{{ discount.start_date.date}}</p>
+{% for buer in discount.buyer.all %}
+    <p>{{buer.name_of_buyer_category}}</p>
+{% endfor %}
+<br/>
+{% for Shop in discount.shop.all %}
+    <p>{{Shop.city}}</p>
+    <p>{{Shop.store_address}}</p>
+        {% for chain in Shop.chain.all %}
+        <img src={% static chain.logo_chain.url %}/>
+        <p>{{chain.name_of_chain }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+
+
+{% for byer_category in Byer_caterory %}
+<p>{{byer_category.name_of_buyer_category }}</p>
+{% endfor %}
+</body>
+</html>

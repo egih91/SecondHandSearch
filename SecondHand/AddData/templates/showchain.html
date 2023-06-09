@@ -1,0 +1,12 @@
+
+<!-- Выводим уже созданные записи -->
+
+{% for chain in Chains %}
+{% load static%}
+
+<img src={% static chain.logo_chain.url %}/>
+<!-- Выводим размер картинки -->
+<p>{{chain.name_of_chain }}</p>
+<p>{{chain.description }}</p>
+<br/>
+{% endfor %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shops</title>
+</head>
+<body>
+
+
+{% for Shop in Shops %}
+{% load static%}
+<p>{{Shop.country}}</p>
+<p>{{Shop.city}}</p>
+<p>{{Shop.store_address}}</p>
+<img src={% static Shop.foto_store.url %}/>
+{% for chain in Shop.chain.all %}
+<img src={% static chain.logo_chain.url %}/>
+<p>{{chain.name_of_chain }}</p>
+{% endfor %}
+{% endfor %}
+
+
+</body>
+</html>
